@@ -1,5 +1,7 @@
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_native_text_input/flutter_native_text_input.dart';
 import 'package:flutter_native_text_input_example/demo_item.dart';
 import 'package:flutter_native_text_input_example/more_use_case_listing_page.dart';
@@ -14,16 +16,25 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: HomePage());
+    return DynamicColorBuilder(builder: (light, dark) {
+      return MaterialApp(
+          theme: ThemeData(colorScheme: light, useMaterial3: true),
+          darkTheme: ThemeData(colorScheme: dark, useMaterial3: true),
+          home: HomePage());
+    });
   }
 }
 
 class HomePage extends StatelessWidget {
   final FocusNode _focusNode = FocusNode();
 
+  HomePage({Key? key}) : super(key: key);
+
   _onChangeText(value) => debugPrint("_onChangeText: $value");
+
   _onSubmittedText(value) => debugPrint("_onSubmittedText: $value");
 
   @override
@@ -77,12 +88,6 @@ class HomePage extends StatelessWidget {
             child: Container(
               height: 30,
               child: NativeTextInput(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.black87,
-                    width: 2,
-                  ),
-                ),
                 style: const TextStyle(
                   fontSize: 16,
                   color: Colors.black54,
@@ -107,9 +112,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Center(
-            child: FlatButton(
-                color: Colors.blue,
-                colorBrightness: Brightness.dark,
+            child: TextButton(
                 child: const Text("View More Use Cases"),
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(

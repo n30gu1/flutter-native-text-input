@@ -1,8 +1,11 @@
 package dev.henryleunghk.flutter_native_text_input
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.Typeface
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.InputType
 import android.util.Log
@@ -12,11 +15,13 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.core.widget.doOnTextChanged
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.platform.PlatformView
+import java.lang.reflect.Field
 
 val TAG: String = "NativeTextInput"
 
@@ -37,9 +42,9 @@ internal class NativeTextInput(context: Context, id: Int, creationParams: Map<St
 
         editText = EditText(context)
         editText.setBackgroundResource(R.drawable.edit_text_background)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            editText.setTextCursorDrawable(R.drawable.edit_text_cursor)
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//            editText.setTextCursorDrawable(R.drawable.edit_text_cursor)
+//        }
 
         if (creationParams.get("fontColor") != null) {
             val rgbMap = creationParams.get("fontColor") as Map<String, Float>

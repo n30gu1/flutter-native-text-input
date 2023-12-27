@@ -112,9 +112,7 @@ class _MoreUseCaseListingPageState extends State<MoreUseCaseListingPage> {
                   title: "Focusing or Unfocusing Text Input",
                   child: Column(
                     children: [
-                      FlatButton(
-                          color: Colors.blue,
-                          colorBrightness: Brightness.dark,
+                      TextButton(
                           child: const Text("Tap Me!"),
                           onPressed: () {
                             if (_focusNode.hasFocus) {
@@ -134,9 +132,7 @@ class _MoreUseCaseListingPageState extends State<MoreUseCaseListingPage> {
                   title: "Filling Text Programmatically",
                   child: Column(
                     children: [
-                      FlatButton(
-                        color: Colors.blue,
-                        colorBrightness: Brightness.dark,
+                      TextButton(
                         child: const Text("Tap Me!"),
                         onPressed: () => _changeTextController.text =
                             DateTime.now().toString(),
